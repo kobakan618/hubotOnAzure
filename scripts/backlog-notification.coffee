@@ -21,19 +21,15 @@ module.exports = (robot) ->
               return
 
       # 投稿メッセージを整形
-      url = 
-"#{process.env.BACKLOG_URL}/view/#{body.project.projectKey}-#{body.content.key_id}"
+      url = "#{process.env.BACKLOG_URL}/view/#{body.project.projectKey}-#{body.content.key_id}"
       if body.content.comment?.id?
           url += "#comment-#{body.content.comment.id}"
 
       message = "*Backlog #{label}*\n"
-      message += "[#{body.project.projectKey}-#{body.content.key_id}] - 
-"
+      message += "[#{body.project.projectKey}-#{body.content.key_id}] - "
 
-      # 
-ここでチケットを作った作成者のユーザ名がbyの後ろについてしまい、知らせたい人じゃない人にメンションが飛んでしまいがち
-      # message += "#{body.content.summary} _by 
-#{body.createdUser.name}_\n>>> "
+      # ここでチケットを作った作成者のユーザ名がbyの後ろについてしまい、知らせたい人じゃない人にメンションが飛んでしまいがち
+      # message += "#{body.content.summary} _by #{body.createdUser.name}_\n>>> "
       message += "#{body.content.summary}"
 
       # notificatonに通知したい人がいればその名前をメンションしてくれる
